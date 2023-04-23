@@ -1,0 +1,20 @@
+Analysis & Synthesis Status : Successful - Thu Nov 18 15:53:29 2021
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Revision Name : mp4
+Top-level Entity Name : mp4
+Family : Arria II GX
+Logic utilization : N/A
+    Combinational ALUTs : 3,936
+    Memory ALUTs : 0
+    Dedicated logic registers : 6,109
+Total registers : 6109
+Total pins : 165
+Total virtual pins : 0
+Total block memory bits : 384
+DSP block 18-bit elements : 0
+Total GXB Receiver Channel PCS : 0
+Total GXB Receiver Channel PMA : 0
+Total GXB Transmitter Channel PCS : 0
+Total GXB Transmitter Channel PMA : 0
+Total PLLs : 0
+Total DLLs : 0

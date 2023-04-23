@@ -1,0 +1,6 @@
+set tool_name "ModelSim-Altera (SystemVerilog)"
+set corner_file_list {
+    {{"Slow -3 0.9V 100 Model"} {mp4_cp1_3_900mv_100c_slow.svo mp4_cp1_3_900mv_100c_v_slow.sdo}}
+    {{"Slow -3 0.9V -40 Model"} {mp4_cp1_3_900mv_-40c_slow.svo mp4_cp1_3_900mv_-40c_v_slow.sdo}}
+    {{"Fast -M 0.9V -40 Model"} {mp4_cp1_min_900mv_-40c_fast.svo mp4_cp1_min_900mv_-40c_v_fast.sdo}}
+}

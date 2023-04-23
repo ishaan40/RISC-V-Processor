@@ -1,0 +1,189 @@
+module cache_datapath #(
+  parameter s_offset = 5,
+  parameter s_index = 3,
+  parameter s_tag = 32 - s_offset - s_index,
+  parameter s_mask = 2**s_offset,
+  parameter s_line = 8*s_mask,
+  parameter num_sets = 2**s_index
+)(
+  input clk,
+
+  /* CPU memory data signals */
+  input logic  [31:0]  mem_byte_enable,
+  input logic  [31:0]  mem_address,
+  input logic  [s_line - 1:0] mem_wdata,
+  output logic [s_line - 1:0] mem_rdata,
+
+  /* Physical memory data signals */
+  input  logic [s_line - 1:0] pmem_rdata,
+  output logic [s_line - 1:0] pmem_wdata,
+  output logic [31:0]  pmem_address,
+
+  /* Control signals */
+  input logic [3:0] tag_load,
+  input logic [3:0] valid_load,
+  input logic [3:0] dirty_load,
+  input logic [3:0] dirty_in,
+  output logic [3:0] dirty_out,
+
+  output logic hit,
+  output logic [2:0] lru_out,
+  output logic [3:0] way_hit,
+  input logic [1:0] writing
+);
+
+logic [3:0] [s_line - 1:0] line_in, line_out;
+logic [3:0] [s_tag - 1:0] tag_out;
+logic [3:0] [s_tag - 1:0] address_tag;
+logic [s_index - 1:0]  index;
+logic [3:0] [31:0] mask;
+logic [3:0] valid_out;
+logic [2:0] lru_in;
+
+always_comb begin
+  address_tag = mem_address[31:s_offset + s_index];
+  index = mem_address[s_offset+s_index - 1:s_offset];
+
+
+  if(valid_out[3] && (tag_out == address_tag[3]) || 
+  valid_out[2] && (tag_out == address_tag[2]) ||
+  valid_out[1] && (tag_out == address_tag[1] ||
+  valid_out[0] && (tag_out == address_tag[0]) )
+    hit = 1'b1;
+  else
+    hit = 1'b0;
+
+  way_hit = valid_out[3] && (tag_out == address_tag[3]) ? 4'b1000 : 
+  valid_out[2] && (tag_out == address_tag[2]) ? 4'b0100 : 
+  valid_out[1] && (tag_out == address_tag[1] ? 4'b0010 : 
+  valid_out[0] && (tag_out == address_tag[0]) ? 4'b0001 : 4'b0000;
+
+  lru_in = way_hit[3] ? 3'b00x : way_hit[2] ? 3'b01x : way_hit[1] ? 3'b1x0 : 3'b1x1; 
+
+
+  case (lru_out)
+  //MRU was ab and c, replace d
+  3'b0x0: begin
+  pmem_wdata = line_out[0];
+  pmem_address : (dirty_out[0]) ? {tag_out[0], mem_address[s_offset + s_index - 1:0]} : mem_address;
+  end
+  //MRU was ab and d, replace c
+  3'b0x1: begin
+  pmem_wdata = line_out[1];
+  pmem_address : (dirty_out[1]) ? {tag_out[1], mem_address[s_offset + s_index - 1:0]} : mem_address;;
+  end
+  //MRU was cd and a, replace b
+  3'b10x: begin 
+  pmem_wdata = line_out[2];
+  pmem_address : (dirty_out[2]) ? {tag_out[2], mem_address[s_offset + s_index - 1:0]} : mem_address; ;
+  end
+  //MRU was cd and b, replace a
+  3'b11x: begin 
+  pmem_wdata = line_out[3];
+  pmem_address : (dirty_out[3]) ? {tag_out[3], mem_address[s_offset + s_index - 1:0]} : mem_address;;
+  endcase
+  //pmem_address = (dirty_out) ? {tag_out, mem_address[s_offset + s_index - 1:0]} : mem_address;
+  
+  case(way_hit)
+    4'b0001: begin
+      mem_rdata = line_out[0];
+    end
+
+    4'b0010: begin
+      mem_rdata = line_out[1];
+    end
+
+    4'b0100: begin
+      mem_rdata = line_out[2];
+    end
+
+    4'b1000: begin
+      mem_rdata = line_out[3];
+    end
+  endcase
+
+  case(writing)
+    2'b00: begin // load from memory
+      case (lru_out)
+      //MRU was ab and c, replace d
+      3'b0x0: begin 
+        mask[0] = 32'hFFFFFFFF;
+        line_in[0] = pmem_rdata;
+        pmem_address : (dirty_out[0]) ? {tag_out[0], mem_address[s_offset + s_index - 1:0]} : mem_address;
+      end
+      //MRU was ab and d, replace c
+      3'b0x1: begin 
+        mask[1] = 32'hFFFFFFFF;
+        line_in[1] = pmem_rdata;
+        pmem_address : (dirty_out[1]) ? {tag_out[1], mem_address[s_offset + s_index - 1:0]} : mem_address;;
+      end
+      //MRU was cd and a, replace b
+      3'b10x: begin
+        mask[2] = 32'hFFFFFFFF;
+        line_in[2] = pmem_rdata;
+        pmem_address : (dirty_out[2]) ? {tag_out[2], mem_address[s_offset + s_index - 1:0]} : mem_address; ;
+      end
+      //MRU was cd and b, replace a
+      3'b11x: begin
+        mask[3] = 32'hFFFFFFFF;
+        line_in[3] = pmem_rdata;
+        pmem_address : (dirty_out[3]) ? {tag_out[3], mem_address[s_offset + s_index - 1:0]} : mem_address;;
+      end
+      endcase
+    end
+    2'b01: begin // write from cpu
+      case (way_hit)
+      //MRU was ab and c, replace d
+      4'b0001: begin 
+        mask[0] = mem_byte_enable;
+        line_in[0] = mem_wdata;
+      end
+      //MRU was ab and d, replace c
+      4'b0010: begin 
+        mask[1] = mem_byte_enable;
+        line_in[1] = mem_wdata;
+      end
+      //MRU was cd and a, replace b
+      4'b0100: begin
+        mask[2] = mem_byte_enable;
+        line_in[2] = mem_wdata;
+      end
+      4'b1000: begin
+        mask[3] = mem_byte_enable;
+        line_in[3] = mem_wdata;          
+      end
+      endcase
+    end
+    default: begin // don't change data
+      mask = 0;
+      line_in[0] = mem_wdata;
+      line_in[1] = mem_wdata;
+      line_in[2] = mem_wdata;
+      line_in[3] = mem_wdata;
+    end
+	endcase
+end
+
+data_array DM_cache (clk, mask[3], index, index, line_in[3], line_out[3]);
+array #(s_tag) tag (clk, tag_load[3], index, index, address_tag[3], tag_out[3]);
+array #(1) valid (clk, valid_load[3], index, index, 1'b1, valid_out[3]);
+array #(1) dirty (clk, dirty_load[3], index, index, dirty_in[3], dirty_out[3]);
+
+data_array DM_cache_2 (clk, mask[2], index, index, line_in[2], line_out[2]);
+array #(s_tag) tag_2 (clk, tag_load[2], index, index, address_tag[2], tag_out[2]);
+array #(1) valid_2 (clk, valid_load[2], index, index, 1'b1, valid_out[2]);
+array #(1) dirty_2 (clk, dirty_load[2], index, index, dirty_in[2], dirty_out[2]);
+
+data_array DM_cache_3 (clk, mask[1], index, index, line_in[1], line_out[1]);
+array #(s_tag) tag_3 (clk, tag_load[1], index, index, address_tag[1], tag_out[1]);
+array #(1) valid_3 (clk, valid_load[1], index, index, 1'b1, valid_out[1]);
+array #(1) dirty_3 (clk, dirty_load[1], index, index, dirty_in[1], dirty_out[1]);
+
+data_array DM_cache_4 (clk, mask[0], index, index, line_in[0], line_out[0]);
+array #(s_tag) tag_4 (clk, tag_load[0], index, index, address_tag[0], tag_out[0]);
+array #(1) valid_4 (clk, valid_load[0], index, index, 1'b1, valid_out[0]);
+array #(1) dirty_4 (clk, dirty_load[0], index, index, dirty_in[0], dirty_out[0]);
+
+array #(3) lru (clk, lru_load, index, index, lru_in, lru_out);
+
+endmodule : cache_datapath

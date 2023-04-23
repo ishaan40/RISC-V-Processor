@@ -1,0 +1,582 @@
+Analysis & Synthesis report for mp4_cp1
+Mon Oct 25 14:46:25 2021
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for User Entity Instance: datapath:datapath|pc_register:pc_reg
+ 12. Port Connectivity Checks: "datapath:datapath|pipeline_stage:MEM_WB_stage"
+ 13. Port Connectivity Checks: "datapath:datapath|pipeline_stage:EX_MEM_stage"
+ 14. Port Connectivity Checks: "datapath:datapath|pipeline_stage:ID_EX_stage"
+ 15. Port Connectivity Checks: "datapath:datapath|pipeline_stage:IF_ID_stage"
+ 16. Port Connectivity Checks: "datapath:datapath|pc_register:pc_reg"
+ 17. Post-Synthesis Netlist Statistics for Top Partition
+ 18. Elapsed Time Per Partition
+ 19. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                        ;
++-----------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status       ; Successful - Mon Oct 25 14:46:25 2021           ;
+; Quartus Prime Version             ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
+; Revision Name                     ; mp4_cp1                                         ;
+; Top-level Entity Name             ; mp4_cp1                                         ;
+; Family                            ; Arria II GX                                     ;
+; Logic utilization                 ; N/A                                             ;
+;     Combinational ALUTs           ; 1,343                                           ;
+;     Memory ALUTs                  ; 0                                               ;
+;     Dedicated logic registers     ; 1,559                                           ;
+; Total registers                   ; 1559                                            ;
+; Total pins                        ; 171                                             ;
+; Total virtual pins                ; 0                                               ;
+; Total block memory bits           ; 0                                               ;
+; DSP block 18-bit elements         ; 0                                               ;
+; Total GXB Receiver Channel PCS    ; 0                                               ;
+; Total GXB Receiver Channel PMA    ; 0                                               ;
+; Total GXB Transmitter Channel PCS ; 0                                               ;
+; Total GXB Transmitter Channel PMA ; 0                                               ;
+; Total PLLs                        ; 0                                               ;
+; Total DLLs                        ; 0                                               ;
++-----------------------------------+-------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; EP2AGX45DF25I3     ;                    ;
+; Top-level entity name                                                           ; mp4_cp1            ; mp4_cp1            ;
+; Family name                                                                     ; Arria II GX        ; Cyclone V          ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                        ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                               ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 4           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
++----------------------------+-------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                           ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                       ; Library ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------+---------+
+; hdl/pipeline_stage.sv            ; yes             ; User SystemVerilog HDL File  ; /home/sphan5/Pied-Piper/CP1/hdl/pipeline_stage.sv  ;         ;
+; hdl/datapath.sv                  ; yes             ; User SystemVerilog HDL File  ; /home/sphan5/Pied-Piper/CP1/hdl/datapath.sv        ;         ;
+; hdl/control_rom.sv               ; yes             ; User SystemVerilog HDL File  ; /home/sphan5/Pied-Piper/CP1/hdl/control_rom.sv     ;         ;
+; hdl/mp4_cp1.sv                   ; yes             ; User SystemVerilog HDL File  ; /home/sphan5/Pied-Piper/CP1/hdl/mp4_cp1.sv         ;         ;
+; hdl/rv32i_types.sv               ; yes             ; User SystemVerilog HDL File  ; /home/sphan5/Pied-Piper/CP1/hdl/rv32i_types.sv     ;         ;
+; hdl/rv32i_mux_types.sv           ; yes             ; User SystemVerilog HDL File  ; /home/sphan5/Pied-Piper/CP1/hdl/rv32i_mux_types.sv ;         ;
+; hdl/regfile.sv                   ; yes             ; User SystemVerilog HDL File  ; /home/sphan5/Pied-Piper/CP1/hdl/regfile.sv         ;         ;
+; hdl/pc_reg.sv                    ; yes             ; User SystemVerilog HDL File  ; /home/sphan5/Pied-Piper/CP1/hdl/pc_reg.sv          ;         ;
+; hdl/cmp.sv                       ; yes             ; User SystemVerilog HDL File  ; /home/sphan5/Pied-Piper/CP1/hdl/cmp.sv             ;         ;
+; hdl/alu.sv                       ; yes             ; User SystemVerilog HDL File  ; /home/sphan5/Pied-Piper/CP1/hdl/alu.sv             ;         ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------+---------+
+
+
++-----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary               ;
++-----------------------------------------------+-----------+
+; Resource                                      ; Usage     ;
++-----------------------------------------------+-----------+
+; Estimated ALUTs Used                          ; 1343      ;
+;     -- Combinational ALUTs                    ; 1343      ;
+;     -- Memory ALUTs                           ; 0         ;
+;     -- LUT_REGs                               ; 0         ;
+; Dedicated logic registers                     ; 1559      ;
+;                                               ;           ;
+; Estimated ALUTs Unavailable                   ; 28        ;
+;     -- Due to unpartnered combinational logic ; 28        ;
+;     -- Due to Memory ALUTs                    ; 0         ;
+;                                               ;           ;
+; Total combinational functions                 ; 1343      ;
+; Combinational ALUT usage by number of inputs  ;           ;
+;     -- 7 input functions                      ; 28        ;
+;     -- 6 input functions                      ; 847       ;
+;     -- 5 input functions                      ; 149       ;
+;     -- 4 input functions                      ; 128       ;
+;     -- <=3 input functions                    ; 191       ;
+;                                               ;           ;
+; Combinational ALUTs by mode                   ;           ;
+;     -- normal mode                            ; 1222      ;
+;     -- extended LUT mode                      ; 28        ;
+;     -- arithmetic mode                        ; 93        ;
+;     -- shared arithmetic mode                 ; 0         ;
+;                                               ;           ;
+; Estimated ALUT/register pairs used            ; 2549      ;
+;                                               ;           ;
+; Total registers                               ; 1559      ;
+;     -- Dedicated logic registers              ; 1559      ;
+;     -- I/O registers                          ; 0         ;
+;     -- LUT_REGs                               ; 0         ;
+;                                               ;           ;
+;                                               ;           ;
+; I/O pins                                      ; 171       ;
+;                                               ;           ;
+; DSP block 18-bit elements                     ; 0         ;
+;                                               ;           ;
+; Maximum fan-out node                          ; clk~input ;
+; Maximum fan-out                               ; 1559      ;
+; Total fan-out                                 ; 13026     ;
+; Average fan-out                               ; 4.02      ;
++-----------------------------------------------+-----------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                   ;
++-------------------------------------+---------------------+---------------------------+-------------------+--------------+---------+-----------+-----------+-----------+------+--------------+--------------------------------------------------------+----------------+--------------+
+; Compilation Hierarchy Node          ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 12x12 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; Full Hierarchy Name                                    ; Entity Name    ; Library Name ;
++-------------------------------------+---------------------+---------------------------+-------------------+--------------+---------+-----------+-----------+-----------+------+--------------+--------------------------------------------------------+----------------+--------------+
+; |mp4_cp1                            ; 1343 (0)            ; 1559 (0)                  ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 171  ; 0            ; |mp4_cp1                                               ; mp4_cp1        ; work         ;
+;    |datapath:datapath|              ; 1343 (248)          ; 1559 (0)                  ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4_cp1|datapath:datapath                             ; datapath       ; work         ;
+;       |alu:ALU|                     ; 180 (180)           ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4_cp1|datapath:datapath|alu:ALU                     ; alu            ; work         ;
+;       |cmp:CMP|                     ; 58 (58)             ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4_cp1|datapath:datapath|cmp:CMP                     ; cmp            ; work         ;
+;       |control_rom:ctrl_rom|        ; 22 (22)             ; 0 (0)                     ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4_cp1|datapath:datapath|control_rom:ctrl_rom        ; control_rom    ; work         ;
+;       |pc_register:pc_reg|          ; 3 (3)               ; 32 (32)                   ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4_cp1|datapath:datapath|pc_register:pc_reg          ; pc_register    ; work         ;
+;       |pipeline_stage:EX_MEM_stage| ; 126 (126)           ; 146 (146)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4_cp1|datapath:datapath|pipeline_stage:EX_MEM_stage ; pipeline_stage ; work         ;
+;       |pipeline_stage:ID_EX_stage|  ; 650 (650)           ; 152 (152)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4_cp1|datapath:datapath|pipeline_stage:ID_EX_stage  ; pipeline_stage ; work         ;
+;       |pipeline_stage:IF_ID_stage|  ; 12 (12)             ; 98 (98)                   ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4_cp1|datapath:datapath|pipeline_stage:IF_ID_stage  ; pipeline_stage ; work         ;
+;       |pipeline_stage:MEM_WB_stage| ; 0 (0)               ; 139 (139)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4_cp1|datapath:datapath|pipeline_stage:MEM_WB_stage ; pipeline_stage ; work         ;
+;       |regfile:regfile|             ; 44 (44)             ; 992 (992)                 ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0         ; 0    ; 0            ; |mp4_cp1|datapath:datapath|regfile:regfile             ; regfile        ; work         ;
++-------------------------------------+---------------------+---------------------------+-------------------+--------------+---------+-----------+-----------+-----------+------+--------------+--------------------------------------------------------+----------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                     ;
++-----------------------------------------------+----------------------------------------+
+; Register name                                 ; Reason for Removal                     ;
++-----------------------------------------------+----------------------------------------+
+; datapath:datapath|regfile:regfile|data[0][0]  ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][1]  ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][2]  ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][3]  ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][4]  ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][5]  ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][6]  ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][7]  ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][8]  ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][9]  ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][10] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][11] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][12] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][13] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][14] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][15] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][16] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][17] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][18] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][19] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][20] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][21] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][22] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][23] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][24] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][25] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][26] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][27] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][28] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][29] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][30] ; Stuck at GND due to stuck port data_in ;
+; datapath:datapath|regfile:regfile|data[0][31] ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 32        ;                                        ;
++-----------------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 1559  ;
+; Number of registers using Synchronous Clear  ; 1534  ;
+; Number of registers using Synchronous Load   ; 30    ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 993   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------+
+; 3:1                ; 2 bits    ; 4 ALUTs       ; 4 ALUTs              ; 0 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pc_register:pc_reg|data[6]                               ;
+; 3:1                ; 28 bits   ; 56 ALUTs      ; 0 ALUTs              ; 56 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|pc_register:pc_reg|data[16]                              ;
+; 3:1                ; 6 bits    ; 12 ALUTs      ; 12 ALUTs             ; 0 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:IF_ID_stage|data_data.imm[8]              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[16][22]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[8][16]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[24][20]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[4][3]                               ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[20][11]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[12][8]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[28][0]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[2][3]                               ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[18][13]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[10][4]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[26][14]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[6][3]                               ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[22][21]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[14][26]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[30][21]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[1][23]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[17][19]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[9][17]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[25][1]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[5][17]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[21][4]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[13][18]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[29][22]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[3][21]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[19][27]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[11][9]                              ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[27][23]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[7][9]                               ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[23][28]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[15][21]                             ;
+; 3:1                ; 32 bits   ; 64 ALUTs      ; 0 ALUTs              ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|regfile:regfile|data[31][16]                             ;
+; 3:1                ; 3 bits    ; 6 ALUTs       ; 6 ALUTs              ; 0 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:IF_ID_stage|ctrl_data.funct3[1]           ;
+; 9:1                ; 2 bits    ; 12 ALUTs      ; 6 ALUTs              ; 6 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:EX_MEM_stage|ctrl_data.mem_byte_enable[1] ;
+; 5:1                ; 2 bits    ; 6 ALUTs       ; 4 ALUTs              ; 2 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:IF_ID_stage|ctrl_data.cmpop[0]            ;
+; 34:1               ; 32 bits   ; 704 ALUTs     ; 640 ALUTs            ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:ID_EX_stage|data_data.rs1_out[16]         ;
+; 34:1               ; 32 bits   ; 704 ALUTs     ; 640 ALUTs            ; 64 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:ID_EX_stage|data_data.rs2_out[25]         ;
+; 14:1               ; 5 bits    ; 45 ALUTs      ; 40 ALUTs             ; 5 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:EX_MEM_stage|data_data.alu_out[7]         ;
+; 15:1               ; 8 bits    ; 80 ALUTs      ; 64 ALUTs             ; 16 ALUTs               ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:EX_MEM_stage|data_data.alu_out[24]        ;
+; 14:1               ; 3 bits    ; 27 ALUTs      ; 24 ALUTs             ; 3 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:EX_MEM_stage|data_data.alu_out[14]        ;
+; 16:1               ; 2 bits    ; 20 ALUTs      ; 18 ALUTs             ; 2 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:EX_MEM_stage|data_data.alu_out[10]        ;
+; 17:1               ; 2 bits    ; 22 ALUTs      ; 20 ALUTs             ; 2 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:EX_MEM_stage|data_data.alu_out[3]         ;
+; 17:1               ; 2 bits    ; 22 ALUTs      ; 20 ALUTs             ; 2 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:EX_MEM_stage|data_data.alu_out[25]        ;
+; 18:1               ; 3 bits    ; 36 ALUTs      ; 33 ALUTs             ; 3 ALUTs                ; Yes        ; |mp4_cp1|datapath:datapath|pipeline_stage:EX_MEM_stage|data_data.alu_out[28]        ;
+; 4:1                ; 2 bits    ; 4 ALUTs       ; 4 ALUTs              ; 0 ALUTs                ; No         ; |mp4_cp1|datapath:datapath|alu:ALU|ShiftRight1                                      ;
+; 4:1                ; 49 bits   ; 98 ALUTs      ; 98 ALUTs             ; 0 ALUTs                ; No         ; |mp4_cp1|datapath:datapath|alu:ALU|ShiftRight1                                      ;
+; 4:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |mp4_cp1|datapath:datapath|alu:ALU|ShiftRight1                                      ;
+; 4:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |mp4_cp1|datapath:datapath|alu:ALU|ShiftRight0                                      ;
+; 4:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |mp4_cp1|datapath:datapath|alu:ALU|ShiftLeft0                                       ;
+; 4:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |mp4_cp1|datapath:datapath|alu:ALU|ShiftLeft0                                       ;
+; 4:1                ; 4 bits    ; 8 ALUTs       ; 8 ALUTs              ; 0 ALUTs                ; No         ; |mp4_cp1|datapath:datapath|alu:ALU|ShiftLeft0                                       ;
+; 7:1                ; 16 bits   ; 64 ALUTs      ; 64 ALUTs             ; 0 ALUTs                ; No         ; |mp4_cp1|datapath:datapath|Selector39                                               ;
+; 10:1               ; 7 bits    ; 42 ALUTs      ; 42 ALUTs             ; 0 ALUTs                ; No         ; |mp4_cp1|datapath:datapath|Selector45                                               ;
+; 13:1               ; 6 bits    ; 48 ALUTs      ; 36 ALUTs             ; 12 ALUTs               ; No         ; |mp4_cp1|datapath:datapath|Selector54                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: datapath:datapath|pc_register:pc_reg ;
++----------------+-------+----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                     ;
++----------------+-------+----------------------------------------------------------+
+; width          ; 32    ; Signed Integer                                           ;
++----------------+-------+----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "datapath:datapath|pipeline_stage:MEM_WB_stage"                                                              ;
++------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                         ; Type   ; Severity ; Details                                                                             ;
++------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load                         ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; stage_ctrl_o.cmpmux_sel      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_ctrl_o.alumux1_sel     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_ctrl_o.modmux_sel      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_ctrl_o.aluop           ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_ctrl_o.cmpop           ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_ctrl_o.dmem_read       ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_ctrl_o.dmem_write      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_ctrl_o.mem_byte_enable ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_ctrl_o.opcode          ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_ctrl_o.funct3          ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_data_o.rs1             ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_data_o.rs2             ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_data_o.rs1_out         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_data_o.rs2_out         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "datapath:datapath|pipeline_stage:EX_MEM_stage"                                                       ;
++-----------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                  ; Type   ; Severity ; Details                                                                             ;
++-----------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load                  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; stage_data_o.data_mdr ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "datapath:datapath|pipeline_stage:ID_EX_stage"                                                               ;
++------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                         ; Type   ; Severity ; Details                                                                             ;
++------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load                         ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; stage_ctrl_o.mem_byte_enable ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_ctrl_o.br_en           ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_data_o.alu_out         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "datapath:datapath|pipeline_stage:IF_ID_stage"                                                        ;
++-----------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                  ; Type   ; Severity ; Details                                                                             ;
++-----------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load                  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; stage_data_i.rs1_out  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; stage_data_i.rs2_out  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; stage_data_i.alu_out  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; stage_data_i.data_mdr ; Input  ; Info     ; Stuck at GND                                                                        ;
+; stage_data_o.rs1_out  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; stage_data_o.rs2_out  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "datapath:datapath|pc_register:pc_reg" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; load ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriaii_ff            ; 1559                        ;
+;     ENA SCLR          ; 993                         ;
+;     SCLR              ; 513                         ;
+;     SCLR SLD          ; 28                          ;
+;     SLD               ; 2                           ;
+;     plain             ; 23                          ;
+; boundary_port         ; 171                         ;
+; stratixiv_lcell_comb  ; 1344                        ;
+;     arith             ; 93                          ;
+;         1 data inputs ; 61                          ;
+;         5 data inputs ; 32                          ;
+;     extend            ; 28                          ;
+;         7 data inputs ; 28                          ;
+;     normal            ; 1223                        ;
+;         0 data inputs ; 1                           ;
+;         2 data inputs ; 26                          ;
+;         3 data inputs ; 104                         ;
+;         4 data inputs ; 128                         ;
+;         5 data inputs ; 117                         ;
+;         6 data inputs ; 847                         ;
+;                       ;                             ;
+; Max LUT depth         ; 6.20                        ;
+; Average LUT depth     ; 3.01                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:03     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+    Info: Processing started: Mon Oct 25 14:46:08 2021
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off mp4_cp1 -c mp4_cp1
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/pipeline_stage.sv
+    Info (12023): Found entity 1: pipeline_stage File: /home/sphan5/Pied-Piper/CP1/hdl/pipeline_stage.sv Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/datapath.sv
+    Info (12023): Found entity 1: datapath File: /home/sphan5/Pied-Piper/CP1/hdl/datapath.sv Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/control_rom.sv
+    Info (12023): Found entity 1: control_rom File: /home/sphan5/Pied-Piper/CP1/hdl/control_rom.sv Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/mp4_cp1.sv
+    Info (12023): Found entity 1: mp4_cp1 File: /home/sphan5/Pied-Piper/CP1/hdl/mp4_cp1.sv Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/given_cache/line_adapter.sv
+    Info (12023): Found entity 1: line_adapter File: /home/sphan5/Pied-Piper/CP1/hdl/given_cache/line_adapter.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/given_cache/data_array.sv
+    Info (12023): Found entity 1: data_array File: /home/sphan5/Pied-Piper/CP1/hdl/given_cache/data_array.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/given_cache/cache_datapath.sv
+    Info (12023): Found entity 1: cache_datapath File: /home/sphan5/Pied-Piper/CP1/hdl/given_cache/cache_datapath.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/given_cache/cache_control.sv
+    Info (12023): Found entity 1: cache_control File: /home/sphan5/Pied-Piper/CP1/hdl/given_cache/cache_control.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/given_cache/cache.sv
+    Info (12023): Found entity 1: cache File: /home/sphan5/Pied-Piper/CP1/hdl/given_cache/cache.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/given_cache/array.sv
+    Info (12023): Found entity 1: array File: /home/sphan5/Pied-Piper/CP1/hdl/given_cache/array.sv Line: 2
+Info (12021): Found 1 design units, including 0 entities, in source file hdl/rv32i_types.sv
+    Info (12022): Found design unit 1: rv32i_types (SystemVerilog) File: /home/sphan5/Pied-Piper/CP1/hdl/rv32i_types.sv Line: 1
+Info (12021): Found 6 design units, including 0 entities, in source file hdl/rv32i_mux_types.sv
+    Info (12022): Found design unit 1: pcmux (SystemVerilog) File: /home/sphan5/Pied-Piper/CP1/hdl/rv32i_mux_types.sv Line: 1
+    Info (12022): Found design unit 2: modmux (SystemVerilog) File: /home/sphan5/Pied-Piper/CP1/hdl/rv32i_mux_types.sv Line: 9
+    Info (12022): Found design unit 3: marmux (SystemVerilog) File: /home/sphan5/Pied-Piper/CP1/hdl/rv32i_mux_types.sv Line: 16
+    Info (12022): Found design unit 4: cmpmux (SystemVerilog) File: /home/sphan5/Pied-Piper/CP1/hdl/rv32i_mux_types.sv Line: 23
+    Info (12022): Found design unit 5: alumux (SystemVerilog) File: /home/sphan5/Pied-Piper/CP1/hdl/rv32i_mux_types.sv Line: 30
+    Info (12022): Found design unit 6: regfilemux (SystemVerilog) File: /home/sphan5/Pied-Piper/CP1/hdl/rv32i_mux_types.sv Line: 46
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/register.sv
+    Info (12023): Found entity 1: register File: /home/sphan5/Pied-Piper/CP1/hdl/register.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/regfile.sv
+    Info (12023): Found entity 1: regfile File: /home/sphan5/Pied-Piper/CP1/hdl/regfile.sv Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/pc_reg.sv
+    Info (12023): Found entity 1: pc_register File: /home/sphan5/Pied-Piper/CP1/hdl/pc_reg.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/cmp.sv
+    Info (12023): Found entity 1: cmp File: /home/sphan5/Pied-Piper/CP1/hdl/cmp.sv Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file hdl/alu.sv
+    Info (12023): Found entity 1: alu File: /home/sphan5/Pied-Piper/CP1/hdl/alu.sv Line: 3
+Info (12127): Elaborating entity "mp4_cp1" for the top level hierarchy
+Info (12128): Elaborating entity "datapath" for hierarchy "datapath:datapath" File: /home/sphan5/Pied-Piper/CP1/hdl/mp4_cp1.sv Line: 22
+Info (12128): Elaborating entity "control_rom" for hierarchy "datapath:datapath|control_rom:ctrl_rom" File: /home/sphan5/Pied-Piper/CP1/hdl/datapath.sv Line: 68
+Info (12128): Elaborating entity "pc_register" for hierarchy "datapath:datapath|pc_register:pc_reg" File: /home/sphan5/Pied-Piper/CP1/hdl/datapath.sv Line: 70
+Info (12128): Elaborating entity "pipeline_stage" for hierarchy "datapath:datapath|pipeline_stage:IF_ID_stage" File: /home/sphan5/Pied-Piper/CP1/hdl/datapath.sv Line: 86
+Info (12128): Elaborating entity "regfile" for hierarchy "datapath:datapath|regfile:regfile" File: /home/sphan5/Pied-Piper/CP1/hdl/datapath.sv Line: 102
+Info (12128): Elaborating entity "alu" for hierarchy "datapath:datapath|alu:ALU" File: /home/sphan5/Pied-Piper/CP1/hdl/datapath.sv Line: 186
+Info (12128): Elaborating entity "cmp" for hierarchy "datapath:datapath|cmp:CMP" File: /home/sphan5/Pied-Piper/CP1/hdl/datapath.sv Line: 192
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "inst_read" is stuck at VCC File: /home/sphan5/Pied-Piper/CP1/hdl/mp4_cp1.sv Line: 8
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 2 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "inst_resp" File: /home/sphan5/Pied-Piper/CP1/hdl/mp4_cp1.sv Line: 6
+    Warning (15610): No output dependent on input pin "data_resp" File: /home/sphan5/Pied-Piper/CP1/hdl/mp4_cp1.sv Line: 11
+Info (21057): Implemented 2893 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 68 input pins
+    Info (21059): Implemented 103 output pins
+    Info (21061): Implemented 2722 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 1176 megabytes
+    Info: Processing ended: Mon Oct 25 14:46:25 2021
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:25
+
+
